@@ -12,8 +12,6 @@ import java.util.List;
  * @Author zxy
  * @Date 2025/1/8
  */
-@Repository
-@Primary
 public class CustomerRepository implements CustomerRepo{
     @Override
     public List<Customer> getCustomers() {

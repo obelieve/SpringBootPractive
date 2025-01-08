@@ -10,7 +10,7 @@ import java.util.List;
  * @Author zxy
  * @Date 2025/1/8
  */
-@Repository(value = "fake")
+
 public class CustomerFakeRepository implements CustomerRepo{
     @Override
     public List<Customer> getCustomers() {
