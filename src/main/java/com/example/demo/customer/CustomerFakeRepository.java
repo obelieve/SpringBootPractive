@@ -1,6 +1,7 @@
 package com.example.demo.customer;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * @Author zxy
  * @Date 2025/1/8
  */
-@Component(value = "fake")
+@Repository(value = "fake")
 public class CustomerFakeRepository implements CustomerRepo{
     @Override
     public List<Customer> getCustomers() {
