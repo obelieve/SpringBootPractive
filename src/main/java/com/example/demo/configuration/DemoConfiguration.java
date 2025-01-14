@@ -20,11 +20,10 @@ public class DemoConfiguration {
     @Autowired
     private Environment environment;
 
-    @Autowired
-    private InfoApp infoApp;
+
 
     @Bean
-    CommandLineRunner commandLineRunner(){
+    CommandLineRunner commandLineRunner(InfoApp infoApp){
         return args -> {
             System.out.println("DemoConfiguration -> commandLineRunner");
             System.out.println(environment.getProperty("info.app.version"));
