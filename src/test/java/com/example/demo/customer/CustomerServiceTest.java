@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -16,9 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomerServiceTest {
 
 
-    CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    private CustomerService underTest;
     @BeforeEach
     void setUp() {
+        underTest = new CustomerService(customerRepository);
     }
 
     @AfterEach
@@ -28,18 +34,22 @@ class CustomerServiceTest {
 
     @Test
     void getCustomers() {
-        customerRepository.save(new Customer(1,"name1","pwd1","email1"));
-        customerRepository.save(new Customer(2,"name2","pwd2","email2"));
+//        customerRepository.saveAll(Arrays.asList(
+//                new Customer(1,"name1","pwd1","email1@gmail.com"),
+//                new Customer(2,"name2","pwd2","email2@gmail.com")
+//        ));
+        customerRepository.save(new Customer(1,"name1","pwd1","email1@gmail.com"));
+        customerRepository.save(new Customer(2,"name2","pwd2","email2@gmail.com"));
         assertEquals(2,customerRepository.findAll().size());
     }
 
     @Test
     void getCustom() {
-        customerRepository.save(new Customer(1,"name1","pwd1","email1"));
-        Customer customer = customerRepository.findById(1).orElseThrow();
+        customerRepository.save(new Customer(1,"name1","pwd1","email1@gmail.com"));
+        Customer customer = customerRepository.findById(1).orElseThrow();//underTest.getCustom(1);
         assertEquals(1,customer.getId());
         assertEquals("name1",customer.getName());
         assertEquals("pwd1",customer.getPassword());
-        assertEquals("email1",customer.getEmail());
+        assertEquals("email1@gmail.com",customer.getEmail());
     }
 }
